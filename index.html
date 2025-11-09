@@ -161,18 +161,22 @@ function draw() {
   else if (y + dy > canvas.height - ballRadius - 10) {
     if (x > paddleX && x < paddleX + paddleWidth) dy = -dy;
     else {
-      lives--;
-      if (!lives) {
-        alert("💔 Try again to see the special message 💔");
-        document.location.reload();
-      } else {
-        x = canvas.width / 2;
-        y = canvas.height - 30;
-        dx = 4;
-        dy = -4;
-        paddleX = (canvas.width - paddleWidth) / 2;
-      }
-    }
+  else {
+  lives--;
+  if (!lives) {
+    alert("💔 Try again to see the special message 💔");
+    document.location.reload();
+  } else {
+    // reset position but keep original speed values
+    x = canvas.width / 2;
+    y = canvas.height - 30;
+    const speed = 4.5;  // use the same as your initial
+    dx = (dx > 0 ? 1 : -1) * speed;
+    dy = -speed;
+    paddleX = (canvas.width - paddleWidth) / 2;
+  }
+}
+
   }
 
   if (rightPressed && paddleX < canvas.width - paddleWidth) paddleX += 5;
